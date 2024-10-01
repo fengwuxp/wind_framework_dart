@@ -1,23 +1,24 @@
 import 'dart:io';
 
 import 'package:built_value/serializer.dart';
-import 'package:fengwuxp_dart_basic/wind_utils.dart';
-import 'package:fengwuxp_dart_openfeign/src/constant/http/http_media_type.dart';
-import 'package:fengwuxp_dart_openfeign/src/http/converter/abstract_http_message_converter.dart';
-import 'package:fengwuxp_dart_openfeign/src/http/http_input_message.dart';
-import 'package:fengwuxp_dart_openfeign/src/http/http_output_message.dart';
+import 'package:qs_dart/qs_dart.dart';
 import 'package:logging/logging.dart';
+
+import 'package:wind_http/src/http/converter/abstract_http_message_converter.dart';
+import 'package:wind_http/src/http/enums/http_media_type.dart';
+import 'package:wind_http/src/http/http_input_message.dart';
+import 'package:wind_http/src/http/http_output_message.dart';
 
 /// 用于写入和读取 Content-Type 为[HttpMediaType.FORM_DATA]的数据
 class FormDataHttpMessageConverter extends AbstractHttpMessageConverter {
   static const String _TAG = "FormDataHttpMessageConverter";
   static final _log = Logger(_TAG);
 
-  static final _FORM_DATA = ContentType.parse(HttpMediaType.FORM_DATA);
+  static final _formData = ContentType.parse(HttpMediaType.formData.mediaType);
 
-  static final _MULTIPART_FORM_DATA = ContentType.parse(HttpMediaType.MULTIPART_FORM_DATA);
+  static final _multipartFormData = ContentType.parse(HttpMediaType.multipartFormData.mediaType);
 
-  FormDataHttpMessageConverter() : super([_FORM_DATA, _MULTIPART_FORM_DATA]);
+  FormDataHttpMessageConverter() : super([_formData, _multipartFormData]);
 
   @override
   bool canRead(ContentType mediaType, {Type? serializeType}) {
@@ -35,7 +36,7 @@ class FormDataHttpMessageConverter extends AbstractHttpMessageConverter {
     if (data == null) {
       return Future.value();
     }
-    if (mediaType.value == _FORM_DATA.value) {
+    if (mediaType.value == _formData.value) {
       _writeFormData(data, outputMessage);
     } else {
       _writeMultipartFormData(data, outputMessage);
@@ -47,8 +48,8 @@ class FormDataHttpMessageConverter extends AbstractHttpMessageConverter {
     if (_log.isLoggable(Level.FINER)) {
       _log.finer("write form data $data");
     }
-    var text = QueryStringParser.stringify(data);
-    super.writeBody(text, _FORM_DATA, outputMessage);
+    String text = QS.encode(data);
+    super.writeBody(text, _formData, outputMessage);
   }
 
   // TODO 处理文件上传

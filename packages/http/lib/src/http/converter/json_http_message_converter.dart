@@ -4,43 +4,39 @@ import 'dart:io';
 import 'package:built_value/serializer.dart';
 import 'package:logging/logging.dart';
 import 'package:wind_http/src/http/converter/abstract_http_message_converter.dart';
+import 'package:wind_http/src/http/enums/http_media_type.dart';
+import 'package:wind_http/src/http/http_input_message.dart';
+import 'package:wind_http/src/http/http_output_message.dart';
+import 'package:wind_http/src/http/response_extractor.dart';
+import 'package:wind_http/src/util/encoding_utils.dart';
+import 'package:wind_utils/wind_utils.dart';
 
 /// 基于built value 的http message converter
 /// 用于写入和读取 Content-Type 为[ContentType.json]的数据
-class BuiltValueHttpMessageConverter
-    extends AbstractGenericHttpMessageConverter {
-
-  static const String _TAG = "BuiltValueHttpMessageConverter";
+class JsonHttpMessageConverter extends AbstractGenericHttpMessageConverter {
+  static const String _tag = "BuiltValueHttpMessageConverter";
 
   ///  兼容一些旧服务器响应
   @deprecated
-  static final ContentType _textJson =
-      new ContentType("text", "json", charset: "utf-8");
+  static final ContentType _textJson = ContentType("text", "json", charset: "utf-8");
 
-  static final _log = Logger(_TAG);
+  static final _log = Logger(_tag);
 
-  final JSONSerializer _builtJsonSerializers;
+  final JSONSerializer jsonSerializer;
 
   final BusinessResponseExtractor _businessResponseExtractor;
 
-  BuiltValueHttpMessageConverter(BuiltJsonSerializers builtJsonSerializers,
-      BusinessResponseExtractor? businessResponseExtractor)
-      : this._builtJsonSerializers = builtJsonSerializers,
-        this._businessResponseExtractor =
-            businessResponseExtractor ?? noneBusinessResponseExtractor,
+  JsonHttpMessageConverter(this.jsonSerializer, BusinessResponseExtractor? businessResponseExtractor)
+      : _businessResponseExtractor = businessResponseExtractor ?? noneBusinessResponseExtractor,
         super([ContentType.json, _textJson]);
 
-  factory(BuiltJsonSerializers builtJsonSerializers,
-      {BusinessResponseExtractor? businessResponseExtractor}) {
-    return new BuiltValueHttpMessageConverter(
-        builtJsonSerializers, businessResponseExtractor);
+  factory(JSONSerializer jsonSerializer, {BusinessResponseExtractor? businessResponseExtractor}) {
+    return JsonHttpMessageConverter(jsonSerializer, businessResponseExtractor);
   }
 
   Future<E> read<E>(HttpInputMessage inputMessage, ContentType mediaType,
       {Type? serializeType, FullType specifiedType = FullType.unspecified}) {
-    return getContentTypeEncoding(mediaType)
-        .decodeStream(inputMessage.body)
-        .then((responseBody) {
+    return getContentTypeEncoding(mediaType).decodeStream(inputMessage.body).then((responseBody) {
       if (_log.isLoggable(Level.FINER)) {
         _log.finer("read http response body ==> $responseBody");
       }
@@ -55,12 +51,11 @@ class BuiltValueHttpMessageConverter
       // 基础数据类型
       return result;
     }
-    return this._builtJsonSerializers.parseObject(result,
-        resultType: serializeType, specifiedType: specifiedType);
+    return jsonSerializer.parseObject(result, resultType: serializeType, specifiedType: specifiedType);
   }
 
   _isBaseType(FullType specifiedType, Type? serializeType) {
-    final type = serializeType == null ? specifiedType.root : serializeType;
+    final type = serializeType ?? specifiedType.root;
     if (type == null) {
       return true;
     }
@@ -73,9 +68,8 @@ class BuiltValueHttpMessageConverter
   }
 
   @override
-  Future<void> write(
-      data, ContentType mediaType, HttpOutputMessage outputMessage) {
-    final text = this._builtJsonSerializers.toJsonString(data);
+  Future<void> write(data, ContentType mediaType, HttpOutputMessage outputMessage) {
+    final text = jsonSerializer.toJsonString(data);
     if (_log.isLoggable(Level.FINER)) {
       _log.finer("write data ==> $text");
     }
