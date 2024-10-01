@@ -1,0 +1,21 @@
+name: wind_utils
+description: >
+  dart flutter项目的一些基础支持，json序列化、工具类等
+version: 0.0.1
+repository: https://github.com/fengwuxp/wind_framework_dart
+
+environment:
+  sdk: ^3.5.3
+
+# Add regular dependencies here.
+dependencies:
+  built_collection: ^5.1.1
+  built_value: ^8.9.2
+  logging: ^1.2.0
+
+
+dev_dependencies:
+  args: ^2.4.2
+  lints: ^4.0.0
+  test: ^1.24.0
+  built_value_generator: ^8.9.2
