@@ -8,7 +8,8 @@ import 'package:wind_http/src/util/encoding_utils.dart';
 
 /// 字符串
 class StringMessageConverter extends AbstractHttpMessageConverter<String> {
-  StringMessageConverter(super.supportedMediaTypes);
+  StringMessageConverter([List<ContentType>? supportedMediaTypes])
+      : super(supportedMediaTypes ?? [ContentType.html, ContentType.text]);
 
   @override
   Future<String> read<String>(HttpInputMessage inputMessage, ContentType mediaType,

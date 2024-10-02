@@ -18,11 +18,15 @@ class RestTemplate implements RestOperations {
 
   final List<HttpMessageConverter> _httpMessageConverters;
 
+  final BusinessResponseExtractor? _businessResponseExtractor;
+
   const RestTemplate(this._factory,
       {UriTemplateHandler uriTemplateHandler = const DefaultUriTemplateHandler(),
-      List<HttpMessageConverter<dynamic>> httpMessageConverters = const []})
+      List<HttpMessageConverter<dynamic>> httpMessageConverters = const [],
+      BusinessResponseExtractor? businessResponseExtractor})
       : _httpMessageConverters = httpMessageConverters,
-        _uriTemplateHandler = uriTemplateHandler;
+        _uriTemplateHandler = uriTemplateHandler,
+        _businessResponseExtractor = businessResponseExtractor;
 
   /// GET
   @override
@@ -155,7 +159,7 @@ class RestTemplate implements RestOperations {
     try {
       final result = await responseExtractor.extractData(response) as T;
       if (response.ok) {
-        return result;
+        return _businessResponseExtractor == null ? result : _businessResponseExtractor(result) as T;
       } else {
         // http error response
         return Future.error(response);

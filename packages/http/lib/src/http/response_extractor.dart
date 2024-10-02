@@ -19,7 +19,4 @@ abstract class ResponseExtractor<T> {
 /// Judge whether the business is successfully processed and capture the data results of business response
 /// [responseBody]  the HTTP response data
 /// [return] if request business handle success return business data [String] or [Map] or [List], else return [Future#error(json.decode(responseBody))]
-typedef BusinessResponseExtractor = Future<dynamic> Function(String responseBody);
-
-/// none handle [BusinessResponseExtractor]
-final BusinessResponseExtractor noneBusinessResponseExtractor = (String responseBody) => Future.value(responseBody);
+typedef BusinessResponseExtractor = dynamic Function(dynamic responseBody);

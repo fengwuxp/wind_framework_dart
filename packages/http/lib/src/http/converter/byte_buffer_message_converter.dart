@@ -7,7 +7,8 @@ import 'package:wind_http/src/http/http_input_message.dart';
 import 'package:wind_http/src/http/http_output_message.dart';
 
 class ByteBufferMessageConverter extends AbstractHttpMessageConverter<ByteBuffer> {
-  ByteBufferMessageConverter(super.supportedMediaTypes);
+  ByteBufferMessageConverter([List<ContentType>? supportedMediaTypes])
+      : super(supportedMediaTypes ?? [ContentType.binary]);
 
   @override
   Future<ByteBuffer> read<ByteBuffer>(HttpInputMessage inputMessage, ContentType mediaType,

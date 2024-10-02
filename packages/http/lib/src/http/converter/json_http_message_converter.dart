@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:built_value/serializer.dart';
@@ -23,14 +24,10 @@ class JsonHttpMessageConverter extends AbstractGenericHttpMessageConverter {
 
   final JSONSerializer jsonSerializer;
 
-  final BusinessResponseExtractor _businessResponseExtractor;
+  JsonHttpMessageConverter(this.jsonSerializer) : super([ContentType.json, _textJson]);
 
-  JsonHttpMessageConverter(this.jsonSerializer, BusinessResponseExtractor? businessResponseExtractor)
-      : _businessResponseExtractor = businessResponseExtractor ?? noneBusinessResponseExtractor,
-        super([ContentType.json, _textJson]);
-
-  factory(JSONSerializer jsonSerializer, {BusinessResponseExtractor? businessResponseExtractor}) {
-    return JsonHttpMessageConverter(jsonSerializer, businessResponseExtractor);
+  factory(JSONSerializer jsonSerializer) {
+    return JsonHttpMessageConverter(jsonSerializer);
   }
 
   @override
@@ -40,9 +37,7 @@ class JsonHttpMessageConverter extends AbstractGenericHttpMessageConverter {
       if (_log.isLoggable(Level.FINER)) {
         _log.finer("read http response body ==> $responseBody");
       }
-      return _businessResponseExtractor(responseBody).then((result) {
-        return _resolveExtractorResult(result, specifiedType, serializeType);
-      });
+      return _resolveExtractorResult(json.decode(responseBody), specifiedType, serializeType);
     });
   }
 
