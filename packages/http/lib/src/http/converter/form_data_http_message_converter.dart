@@ -1,13 +1,15 @@
 import 'dart:io';
 
 import 'package:built_value/serializer.dart';
-import 'package:qs_dart/qs_dart.dart';
+import 'package:http/http.dart';
 import 'package:logging/logging.dart';
-
+import 'package:qs_dart/qs_dart.dart';
 import 'package:wind_http/src/http/converter/abstract_http_message_converter.dart';
 import 'package:wind_http/src/http/enums/http_media_type.dart';
+import 'package:wind_http/src/http/enums/http_method.dart';
 import 'package:wind_http/src/http/http_input_message.dart';
 import 'package:wind_http/src/http/http_output_message.dart';
+import 'package:wind_http/src/http/multipart_form_data.dart';
 
 /// 用于写入和读取 Content-Type 为[HttpMediaType.FORM_DATA]的数据
 class FormDataHttpMessageConverter extends AbstractHttpMessageConverter {
@@ -37,21 +39,39 @@ class FormDataHttpMessageConverter extends AbstractHttpMessageConverter {
       return Future.value();
     }
     if (mediaType.value == _formData.value) {
-      _writeFormData(data, outputMessage);
+      return _writeFormData(data, outputMessage);
     } else {
-      _writeMultipartFormData(data, outputMessage);
+      return _writeMultipartFormData(data, outputMessage);
     }
-    return Future.value();
   }
 
-  void _writeFormData(data, HttpOutputMessage outputMessage) {
+  Future<void> _writeFormData(data, HttpOutputMessage outputMessage) {
     if (_log.isLoggable(Level.FINER)) {
       _log.finer("write form data $data");
     }
-    String text = QS.encode(data);
+    String text = QS.encode(data, EncodeOptions(listFormat: ListFormat.repeat));
     super.writeBody(text, _formData, outputMessage);
+    return Future.value();
   }
 
-  // TODO 处理文件上传
-  void _writeMultipartFormData(data, HttpOutputMessage outputMessage) {}
+  // 处理文件上传
+  Future<void> _writeMultipartFormData(data, HttpOutputMessage outputMessage) {
+    bool isMultipartFormData = data is MultipartFormData;
+    if (!isMultipartFormData) {
+      throw ArgumentError('${HttpMediaType.multipartFormData.mediaType} type must use MultipartFormData');
+    }
+
+    if (_log.isLoggable(Level.FINER)) {
+      _log.finer("write multipart form data $data");
+    }
+
+    // 创建 multipart 请求 TODO 待优化
+    final request = MultipartRequest(HttpMethod.post.method, Uri.parse("/"));
+    // 添加普通表单字段
+    data.fields.addAll(data.fields);
+    data.files.addAll(data.files);
+    // 获取 multipart 请求体内容
+    // 写入到输出消息
+    return request.finalize().pipe(outputMessage.body);
+  }
 }

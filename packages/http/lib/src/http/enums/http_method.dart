@@ -27,4 +27,5 @@ enum HttpMethod {
         method == HttpMethod.put ||
         method == HttpMethod.patch;
   }
+
 }

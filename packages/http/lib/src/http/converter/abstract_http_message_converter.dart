@@ -4,8 +4,7 @@ import 'package:wind_http/src/http/converter/http_message_converter.dart';
 import 'package:wind_http/src/http/http_output_message.dart';
 import 'package:wind_http/src/util/encoding_utils.dart';
 
-abstract class AbstractHttpMessageConverter<T>
-    implements HttpMessageConverter<T> {
+abstract class AbstractHttpMessageConverter<T> implements HttpMessageConverter<T> {
   /// 基础数据类型
   static const List<Type> baseTypes = [String, bool, num];
 
@@ -28,8 +27,7 @@ abstract class AbstractHttpMessageConverter<T>
     return this.supportedMediaTypes;
   }
 
-  void writeBody(
-      String? value, ContentType mediaType, HttpOutputMessage outputMessage) {
+  void writeBody(String? value, ContentType mediaType, HttpOutputMessage outputMessage) {
     if (value == null) {
       return;
     }
@@ -43,8 +41,7 @@ abstract class AbstractHttpMessageConverter<T>
   }
 }
 
-abstract class AbstractGenericHttpMessageConverter<T>
-    extends AbstractHttpMessageConverter<T>
+abstract class AbstractGenericHttpMessageConverter<T> extends AbstractHttpMessageConverter<T>
     implements GenericHttpMessageConverter<T> {
   AbstractGenericHttpMessageConverter(super.supportedMediaTypes);
 }

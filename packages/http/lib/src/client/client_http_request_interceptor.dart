@@ -27,5 +27,5 @@ abstract class ClientHttpRequestInterceptor {
   ///
   /// Returns the response after executing or modifying the request.
   /// Throws an [IOException] in case of I/O errors.
-  Future<ClientHttpResponse> interceptor(ClientHttpRequest request, ClientHttpRequestExecution next);
+  Future<ClientHttpResponse> intercept(ClientHttpRequest request, ClientHttpRequestExecution next);
 }

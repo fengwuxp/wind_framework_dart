@@ -1,3 +1,4 @@
+import 'package:wind_http/src/http/enums/http_method.dart';
 import 'package:wind_http/src/http/http_request_context.dart';
 import 'package:wind_http/src/http/response_entity.dart';
 import 'package:wind_http/src/http/response_extractor.dart';
@@ -158,7 +159,7 @@ abstract class RestOperations {
   /// [queryParams]  the variables to expand the template
   /// [timeout]      request timeout
   Future<T> execute<T>(
-      String url, String method, ResponseExtractor<T> responseExtractor,
+      String url, HttpMethod method, ResponseExtractor<T> responseExtractor,
       {dynamic request,
       Map<String, dynamic>? queryParams,
       List<dynamic>? pathVariables,
