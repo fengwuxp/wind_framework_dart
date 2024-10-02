@@ -1,6 +1,5 @@
 import 'package:built_value/serializer.dart';
-import 'package:wind_http/src/http/http_request.dart';
-import 'package:wind_http/src/client//client_http_response.dart';
+import 'package:wind_http/src/client/client_http_response.dart';
 
 /// Generic callback interface used by {@link RestTemplate}'s retrieval methods
 /// Implementations of this interface perform the actual work of extracting data
@@ -20,11 +19,7 @@ abstract class ResponseExtractor<T> {
 /// Judge whether the business is successfully processed and capture the data results of business response
 /// [responseBody]  the HTTP response data
 /// [return] if request business handle success return business data [String] or [Map] or [List], else return [Future#error(json.decode(responseBody))]
-typedef BusinessResponseExtractor = Future<dynamic> Function(
-    String responseBody);
+typedef BusinessResponseExtractor = Future<dynamic> Function(String responseBody);
 
 /// none handle [BusinessResponseExtractor]
-final BusinessResponseExtractor noneBusinessResponseExtractor =
-    (String responseBody) {
-  return Future.value(responseBody);
-};
+final BusinessResponseExtractor noneBusinessResponseExtractor = (String responseBody) => Future.value(responseBody);

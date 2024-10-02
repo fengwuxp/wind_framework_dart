@@ -1,6 +1,4 @@
-
-
-import 'http_message.dart';
+import 'package:wind_http/src/http/http_message.dart';
 
 //// Represents an HTTP request message, consisting of
 /// {@linkplain #getMethod() method} and {@linkplain #getURI() uri}.

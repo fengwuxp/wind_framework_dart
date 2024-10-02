@@ -9,5 +9,5 @@ abstract class ClientHttpResponse implements HttpInputMessage {
   String get reasonPhrase;
 
   //  request is success
-  bool get ok => this.statusCode >= 200 && this.statusCode < 300;
+  bool get ok => statusCode >= 200 && statusCode < 300;
 }

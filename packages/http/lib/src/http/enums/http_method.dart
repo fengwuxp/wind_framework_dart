@@ -1,4 +1,4 @@
-import 'package:built_value/json_object.dart';
+
 
 /// http request method const variable
 enum HttpMethod {
@@ -23,9 +23,6 @@ enum HttpMethod {
 
   static bool supportRequestBody(String httpMethod) {
     HttpMethod method = HttpMethod.valueOf(httpMethod);
-    return method == HttpMethod.post ||
-        method == HttpMethod.put ||
-        method == HttpMethod.patch;
+    return method == HttpMethod.post || method == HttpMethod.put || method == HttpMethod.patch;
   }
-
 }

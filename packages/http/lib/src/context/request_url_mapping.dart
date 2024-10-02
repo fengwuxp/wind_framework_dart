@@ -1,3 +1,5 @@
+
+// 是否 为 http url
 bool isHttpUrl(url) {
   return RegExp("^(http|https)").hasMatch(url);
 }

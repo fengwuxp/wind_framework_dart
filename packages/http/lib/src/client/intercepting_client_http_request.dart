@@ -3,36 +3,13 @@ import 'dart:async';
 import 'package:wind_http/src/client/client_http_request.dart';
 import 'package:wind_http/src/client/client_http_request_interceptor.dart';
 import 'package:wind_http/src/client/client_http_response.dart';
+import 'package:wind_http/src/client/delegate_client_http_request.dart';
 
 /// 支持 [ClientHttpRequestInterceptor] 执行的 [ClientHttpRequest]
-class InterceptingClientHttpRequest implements ClientHttpRequest {
-  final ClientHttpRequest delegate;
-
+class InterceptingClientHttpRequest extends DelegateClientHttpRequest {
   final Iterator<ClientHttpRequestInterceptor> iterator;
 
-  InterceptingClientHttpRequest(this.delegate, this.iterator);
-
-  @override
-  Map<String, dynamic> get attributes => delegate.attributes;
-
-  @override
-  StreamSink<List<int>> get body => delegate.body;
-
-  @override
-  getAttribute(String name) {
-    return delegate.getAttribute(name);
-  }
-
-  @override
-  Map<String, String> get headers => delegate.headers;
-
-  @override
-  String get method => delegate.method;
-
-  @override
-  void putAttribute(String name, value) {
-    delegate.putAttribute(name, value);
-  }
+  InterceptingClientHttpRequest(super.delegate, this.iterator);
 
   @override
   Future<ClientHttpResponse> send() {
@@ -50,16 +27,4 @@ class InterceptingClientHttpRequest implements ClientHttpRequest {
       return request.send();
     }
   }
-
-  @override
-  int get timeout => delegate.timeout;
-
-  @override
-  void uri(Uri uri) {
-    delegate.uri(uri);
-  }
-
-  @override
-// TODO: implement url
-  Uri get url => delegate.url;
 }

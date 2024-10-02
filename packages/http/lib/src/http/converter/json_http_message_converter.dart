@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:built_value/serializer.dart';
 import 'package:logging/logging.dart';
 import 'package:wind_http/src/http/converter/abstract_http_message_converter.dart';
-import 'package:wind_http/src/http/enums/http_media_type.dart';
 import 'package:wind_http/src/http/http_input_message.dart';
 import 'package:wind_http/src/http/http_output_message.dart';
 import 'package:wind_http/src/http/response_extractor.dart';
@@ -34,13 +33,14 @@ class JsonHttpMessageConverter extends AbstractGenericHttpMessageConverter {
     return JsonHttpMessageConverter(jsonSerializer, businessResponseExtractor);
   }
 
+  @override
   Future<E> read<E>(HttpInputMessage inputMessage, ContentType mediaType,
       {Type? serializeType, FullType specifiedType = FullType.unspecified}) {
     return getContentTypeEncoding(mediaType).decodeStream(inputMessage.body).then((responseBody) {
       if (_log.isLoggable(Level.FINER)) {
         _log.finer("read http response body ==> $responseBody");
       }
-      return this._businessResponseExtractor(responseBody).then((result) {
+      return _businessResponseExtractor(responseBody).then((result) {
         return _resolveExtractorResult(result, specifiedType, serializeType);
       });
     });

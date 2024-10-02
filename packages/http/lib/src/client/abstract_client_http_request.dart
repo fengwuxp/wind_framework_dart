@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:wind_http/src/http/http_request_context.dart';
 import 'package:wind_http/src/client/client_http_request.dart';
 import 'package:wind_http/src/http/converter/http_message_converter.dart';
+import 'package:wind_http/src/http/http_request_context.dart';
 
 /// abstract http client
 abstract class AbstractClientHttpRequest extends DefaultHttpRequestContext implements ClientHttpRequest {

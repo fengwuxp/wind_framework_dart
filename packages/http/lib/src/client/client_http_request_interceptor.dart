@@ -8,8 +8,7 @@ import 'package:wind_http/src/client/client_http_response.dart';
 /// and return the response.
 /// - [request] the request, containing method, URI, and headers
 /// Returns the response
-typedef ClientHttpRequestExecution = Future<ClientHttpResponse> Function(
-    ClientHttpRequest request);
+typedef ClientHttpRequestExecution = Future<ClientHttpResponse> Function(ClientHttpRequest request);
 
 /// Intercepts client-side HTTP requests. Implementations of this class can be
 /// registered with the HTTP client (e.g., using `dio` or similar packages),
@@ -18,7 +17,6 @@ typedef ClientHttpRequestExecution = Future<ClientHttpResponse> Function(
 /// The main entry point for interceptors is the `intercept` method,
 /// which allows modifying or observing the HTTP request before it is sent.
 abstract class ClientHttpRequestInterceptor {
-
   /// Intercepts the given HTTP request and returns a response. The given
   /// [ClientHttpRequestInterceptor] allows the interceptor to pass the request
   /// and response to the next entity in the chain.

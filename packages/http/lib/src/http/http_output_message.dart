@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'http_message.dart';
+import 'package:wind_http/src/http/http_message.dart';
 
 /// Represents an HTTP output message, consisting of {@linkplain [HttpMessage.getHeaders()] headers}
 /// and a writable {@linkplain #getBody() body}.

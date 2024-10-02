@@ -32,5 +32,4 @@ class RoutingClientHttpRequestInterceptor implements ClientHttpRequestIntercepto
       return Future.value(request);
     }).then(next);
   }
-
 }

@@ -6,7 +6,6 @@ import 'package:wind_http/src/util/encoding_utils.dart';
 
 /// 基于流的 http response
 class StreamedClientHttpResponse extends ClientHttpResponse {
-
   final StreamedResponse _response;
 
   StreamedClientHttpResponse(this._response);
@@ -15,7 +14,7 @@ class StreamedClientHttpResponse extends ClientHttpResponse {
   Map<String, String> get headers => _response.headers;
 
   @override
-  int get statusCode => this._response.statusCode;
+  int get statusCode => _response.statusCode;
 
   @override
   String get reasonPhrase => _response.reasonPhrase ?? "unknown error";
@@ -24,7 +23,7 @@ class StreamedClientHttpResponse extends ClientHttpResponse {
   Stream<List<int>> get body => _response.stream;
 
   Future<String> bodyAsString() {
-    final contentType = ContentType.parse(this.headers[HttpHeaders.contentTypeHeader] as String);
+    final contentType = ContentType.parse(headers[HttpHeaders.contentTypeHeader] as String);
     return getContentTypeEncoding(contentType).decodeStream(body);
   }
 }

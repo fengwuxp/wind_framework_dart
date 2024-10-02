@@ -9,8 +9,7 @@ class ResponseEntity<T> {
 
   final String _reasonPhrase;
 
-  ResponseEntity(this._statusCode, this._headers, this._body,
-      this._reasonPhrase); // http status code
+  ResponseEntity(this._statusCode, this._headers, this._body, this._reasonPhrase); // http status code
 
   static ResponseEntity<T> of<T>(
     int statusCode,
@@ -36,8 +35,7 @@ class ResponseEntity<T> {
 }
 
 class StringResponseEntity extends ResponseEntity<String> {
-  StringResponseEntity(
-      super.status, super.headers, super.body, super.reasonPhrase);
+  StringResponseEntity(super.status, super.headers, super.body, super.reasonPhrase);
 
   json() {
     return jsonDecode(body);

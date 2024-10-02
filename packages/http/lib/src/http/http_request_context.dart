@@ -9,7 +9,6 @@ abstract class HttpRequestContext {
 }
 
 class DefaultHttpRequestContext implements HttpRequestContext {
-
   @override
   final Map<String, dynamic> attributes;
 

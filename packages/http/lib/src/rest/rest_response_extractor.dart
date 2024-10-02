@@ -8,7 +8,7 @@ import 'package:wind_http/src/http/response_entity.dart';
 import 'package:wind_http/src/http/response_extractor.dart';
 import 'package:wind_utils/wind_utils.dart';
 
-
+// http 响应数据提取
 class HttpMessageConverterExtractor<T> implements ResponseExtractor<T> {
   List<HttpMessageConverter> _messageConverters;
 

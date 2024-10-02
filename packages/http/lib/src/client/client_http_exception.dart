@@ -1,6 +1,5 @@
 import 'package:wind_http/src/client/client_http_request.dart';
 
-
 /// An exception caused by an error in a pkg/http client.
 class ClientHttpException implements Exception {
   /// error message

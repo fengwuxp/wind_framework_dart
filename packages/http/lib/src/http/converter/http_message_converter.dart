@@ -1,14 +1,12 @@
 import 'dart:io';
 
 import 'package:built_value/serializer.dart';
-
 import 'package:wind_http/src/http/http_input_message.dart';
 import 'package:wind_http/src/http/http_output_message.dart';
 
-
 /// reference  Spring Framework org.springframework.http.converter.HttpMessageConverter
 /// Strategy interface that specifies a converter that can convert from and to HTTP requests and responses.
-abstract class HttpMessageConverter<T> {
+abstract class HttpMessageConverter<E> {
   /// Indicates whether the given class can be read by this converter.
   /// [mediaType] the [HttpMediaType] media type to read (can be {@code null} if not specified);
   /// typically the value of a {@code Content-Type} header.
@@ -30,7 +28,7 @@ abstract class HttpMessageConverter<T> {
   /// @return the converted object
   /// @throws IOException in case of I/O errors
   /// @throws HttpMessageNotReadableException in case of conversion errors
-  Future<E> read<E>(HttpInputMessage inputMessage,ContentType mediaType,
+  Future<E> read<E>(HttpInputMessage inputMessage, ContentType mediaType,
       {Type? serializeType, FullType specifiedType = FullType.unspecified});
 
   /// Write an given object to the given output message.
@@ -43,7 +41,7 @@ abstract class HttpMessageConverter<T> {
   /// @param outputMessage the message to write to
   /// @throws IOException in case of I/O errors
   /// @throws HttpMessageNotWritableException in case of conversion errors
-  Future<void> write(T data, ContentType mediaType, HttpOutputMessage outputMessage);
+  Future<void> write(E data, ContentType mediaType, HttpOutputMessage outputMessage);
 }
 
 /// A specialization of {@link [HttpMessageConverter]} that can convert an HTTP request

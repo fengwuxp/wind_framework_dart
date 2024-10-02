@@ -19,5 +19,4 @@ class MappedClientHttpRequestInterceptor extends MappedInterceptor implements Cl
   Future<ClientHttpResponse> intercept(ClientHttpRequest request, ClientHttpRequestExecution next) {
     return _clientInterceptor.intercept(request, next);
   }
-
 }

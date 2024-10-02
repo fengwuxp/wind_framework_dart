@@ -146,10 +146,7 @@ abstract class RestOperations {
   /// Return the value of the Allow header for the given URI.
   /// <p>URI Template variables are expanded using the given map.
   Future<Set<String>> optionsForAllow(String url,
-      {Map<String, dynamic>? queryParams,
-      List<dynamic>? pathVariables,
-      int? timeout,
-      HttpRequestContext? context});
+      {Map<String, dynamic>? queryParams, List<dynamic>? pathVariables, int? timeout, HttpRequestContext? context});
 
   /// Execute the HTTP method to the given URI template, preparing the request with the
   /// [url] the URL
@@ -158,8 +155,7 @@ abstract class RestOperations {
   /// [pathVariables]  the variables to expand the template
   /// [queryParams]  the variables to expand the template
   /// [timeout]      request timeout
-  Future<T> execute<T>(
-      String url, HttpMethod method, ResponseExtractor<T> responseExtractor,
+  Future<T> execute<T>(String url, HttpMethod method, ResponseExtractor<T> responseExtractor,
       {dynamic request,
       Map<String, dynamic>? queryParams,
       List<dynamic>? pathVariables,

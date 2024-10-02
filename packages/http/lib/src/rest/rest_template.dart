@@ -12,14 +12,17 @@ import 'package:wind_http/src/rest/uri_template_handler.dart';
 
 // rest template
 class RestTemplate implements RestOperations {
-  final ClientHttpRequestFactory factory;
+  final ClientHttpRequestFactory _factory;
 
-  final UriTemplateHandler uriTemplateHandler;
+  final UriTemplateHandler _uriTemplateHandler;
 
-  final List<HttpMessageConverter> httpMessageConverters;
+  final List<HttpMessageConverter> _httpMessageConverters;
 
-  const RestTemplate(this.factory,
-      {this.uriTemplateHandler = const DefaultUriTemplateHandler(), this.httpMessageConverters = const []});
+  const RestTemplate(this._factory,
+      {UriTemplateHandler uriTemplateHandler = const DefaultUriTemplateHandler(),
+      List<HttpMessageConverter<dynamic>> httpMessageConverters = const []})
+      : _httpMessageConverters = httpMessageConverters,
+        _uriTemplateHandler = uriTemplateHandler;
 
   /// GET
   @override
@@ -137,8 +140,8 @@ class RestTemplate implements RestOperations {
       int? timeout,
       HttpRequestContext? context}) async {
     // 处理url， 查询参数
-    final uri = uriTemplateHandler.expand(url, queryParams: queryParams ?? {}, pathVariables: pathVariables ?? []);
-    final clientHttpRequest = factory.createRequest(uri, method.method,
+    final uri = _uriTemplateHandler.expand(url, queryParams: queryParams ?? {}, pathVariables: pathVariables ?? []);
+    final clientHttpRequest = _factory.createRequest(uri, method.method,
         requestBody: request, headers: Map.of(headers ?? {}), context: context);
     // 处理请求体
     ClientHttpResponse response;
@@ -163,11 +166,11 @@ class RestTemplate implements RestOperations {
   }
 
   HttpMessageConverterExtractor<T> _httpMessageConverterExtractor<T>(Type? responseType) {
-    return HttpMessageConverterExtractor<T>(httpMessageConverters, responseType: responseType);
+    return HttpMessageConverterExtractor<T>(_httpMessageConverters, responseType: responseType);
   }
 
   ResponseEntityResponseExtractor<T> _responseEntityResponseExtractor<T>(Type? responseType) {
-    return ResponseEntityResponseExtractor<T>(httpMessageConverters, responseType);
+    return ResponseEntityResponseExtractor<T>(_httpMessageConverters, responseType);
   }
 
   HeadResponseExtractor _headResponseExtractor<T>() {
