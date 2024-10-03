@@ -43,29 +43,29 @@ class _$QueryHelloReqSerializer implements StructuredSerializer<QueryHelloReq> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'id':
           result.id = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'date':
           result.date = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'date_gmt':
           result.dateGmt = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'type':
           result.type = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'link':
           result.link = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -87,7 +87,7 @@ class _$QueryHelloReq extends QueryHelloReq {
   final String link;
 
   factory _$QueryHelloReq([void Function(QueryHelloReqBuilder)? updates]) =>
-      (new QueryHelloReqBuilder()..update(updates)).build();
+      (new QueryHelloReqBuilder()..update(updates))._build();
 
   _$QueryHelloReq._(
       {required this.id,
@@ -96,11 +96,11 @@ class _$QueryHelloReq extends QueryHelloReq {
       required this.type,
       required this.link})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(id, 'QueryHelloReq', 'id');
-    BuiltValueNullFieldError.checkNotNull(date, 'QueryHelloReq', 'date');
-    BuiltValueNullFieldError.checkNotNull(dateGmt, 'QueryHelloReq', 'dateGmt');
-    BuiltValueNullFieldError.checkNotNull(type, 'QueryHelloReq', 'type');
-    BuiltValueNullFieldError.checkNotNull(link, 'QueryHelloReq', 'link');
+    BuiltValueNullFieldError.checkNotNull(id, r'QueryHelloReq', 'id');
+    BuiltValueNullFieldError.checkNotNull(date, r'QueryHelloReq', 'date');
+    BuiltValueNullFieldError.checkNotNull(dateGmt, r'QueryHelloReq', 'dateGmt');
+    BuiltValueNullFieldError.checkNotNull(type, r'QueryHelloReq', 'type');
+    BuiltValueNullFieldError.checkNotNull(link, r'QueryHelloReq', 'link');
   }
 
   @override
@@ -123,15 +123,19 @@ class _$QueryHelloReq extends QueryHelloReq {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc($jc($jc($jc(0, id.hashCode), date.hashCode), dateGmt.hashCode),
-            type.hashCode),
-        link.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, date.hashCode);
+    _$hash = $jc(_$hash, dateGmt.hashCode);
+    _$hash = $jc(_$hash, type.hashCode);
+    _$hash = $jc(_$hash, link.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('QueryHelloReq')
+    return (newBuiltValueToStringHelper(r'QueryHelloReq')
           ..add('id', id)
           ..add('date', date)
           ..add('dateGmt', dateGmt)
@@ -192,22 +196,24 @@ class QueryHelloReqBuilder
   }
 
   @override
-  _$QueryHelloReq build() {
+  QueryHelloReq build() => _build();
+
+  _$QueryHelloReq _build() {
     final _$result = _$v ??
         new _$QueryHelloReq._(
             id: BuiltValueNullFieldError.checkNotNull(
-                id, 'QueryHelloReq', 'id'),
+                id, r'QueryHelloReq', 'id'),
             date: BuiltValueNullFieldError.checkNotNull(
-                date, 'QueryHelloReq', 'date'),
+                date, r'QueryHelloReq', 'date'),
             dateGmt: BuiltValueNullFieldError.checkNotNull(
-                dateGmt, 'QueryHelloReq', 'dateGmt'),
+                dateGmt, r'QueryHelloReq', 'dateGmt'),
             type: BuiltValueNullFieldError.checkNotNull(
-                type, 'QueryHelloReq', 'type'),
+                type, r'QueryHelloReq', 'type'),
             link: BuiltValueNullFieldError.checkNotNull(
-                link, 'QueryHelloReq', 'link'));
+                link, r'QueryHelloReq', 'link'));
     replace(_$result);
     return _$result;
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

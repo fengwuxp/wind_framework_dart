@@ -7,7 +7,6 @@ import 'package:wind_utils/src/utils/string_utils.dart';
 /// 基于 built_value 的 json serializer
 /// doc [https://github.com/google/built_value.dart]
 class JSONSerializer {
-
   final Serializers serializers;
 
   JSONSerializer._(this.serializers);
@@ -60,7 +59,7 @@ class JSONSerializer {
   /// object to string
   /// [object] serialize object
   /// [specifiedType]
-  String? toJsonString<T>(object, {FullType? specifiedType}) {
+  String? toJsonString<T>(object, {FullType specifiedType = FullType.unspecified}) {
     if (_isEmpty(object)) {
       return null;
     }
@@ -71,7 +70,7 @@ class JSONSerializer {
     }
 
     if (object is JsonSerializableObject) {
-      return object.toJson();
+      return object.toJson(specifiedType: specifiedType);
     }
 
     // 需要使用泛型

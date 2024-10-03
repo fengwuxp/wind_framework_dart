@@ -7,6 +7,7 @@ library serializers;
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
+import 'package:wind_http/src/built/api_response.dart';
 
 import 'user.dart';
 
@@ -23,9 +24,18 @@ part 'serializers.g.dart';
 /// types needed transitively via fields.
 ///
 /// You usually only need to do this once per project.
-@SerializersFor(const [
+
+@SerializersFor([
   User,
+  ApiResponse,
 ])
-//const FullType(PageInfo,[FullType(ArticleActionInfo)],(){
-//return PageInfo<ArticleActionInfo>;
-final Serializers serializers = (_$serializers.toBuilder().build());
+final Serializers serializers = (_$serializers.toBuilder()
+      ..addPlugin(StandardJsonPlugin())
+      ..addBuilderFactory(FullType(ApiResponse, [FullType(User)]), () => ApiResponseBuilder<User>())
+      ..addBuilderFactory(
+          FullType(ApiResponse, [
+            FullType(BuiltList, [FullType(int)])
+          ]),
+          () => ApiResponseBuilder<BuiltList<int>>())
+      ..addBuilderFactory(FullType(BuiltList, [FullType(int)]), () => ListBuilder<int>()))
+    .build();

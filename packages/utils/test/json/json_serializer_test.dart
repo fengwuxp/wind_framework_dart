@@ -7,8 +7,9 @@ import 'hello/hello.dart';
 import 'serializers.dart';
 
 void main() {
-  test('test json serialize', () {
-    String jsonText = '''
+  group("simple json test", () {
+    test('test json serialize', () {
+      String jsonText = '''
  {
       "id": 157538,
       "date": "2017-07-21T10:30:34",
@@ -24,16 +25,14 @@ void main() {
       ]
     }
     ''';
+      final jsonSerializer = JSONSerializer(serializers);
+      JSON.setSerializer(jsonSerializer);
+      final hello = serializers.deserializeWith(Hello.serializer, jsonDecode(jsonText));
 
-    final jsonSerializer = JSONSerializer(serializers);
-    JSON.setSerializer(jsonSerializer);
-    final hello =
-        serializers.deserializeWith(Hello.serializer, jsonDecode(jsonText));
-    final result = jsonSerializer.parseObject(jsonText, resultType: Hello);
-    expect(result, hello);
-    expect(jsonSerializer.parseObject(json.decode(jsonText), resultType: Hello),
-        hello);
-    expect(json.encode(serializers.serializeWith(Hello.serializer, hello)),
-        JSON.toJsonString(result));
+      final result = jsonSerializer.parseObject(jsonText, resultType: Hello);
+      expect(result, hello);
+      expect(jsonSerializer.parseObject(json.decode(jsonText), resultType: Hello), hello);
+      expect(hello?.toJson(), JSON.toJsonString(result));
+    });
   });
 }

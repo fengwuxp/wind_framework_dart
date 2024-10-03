@@ -22,7 +22,7 @@ class _$UserSerializer implements StructuredSerializer<User> {
       serializers.serialize(object.id, specifiedType: const FullType(int)),
       'date',
       serializers.serialize(object.date, specifiedType: const FullType(String)),
-      'date_gmt',
+      'dateGmt',
       serializers.serialize(object.dateGmt,
           specifiedType: const FullType(String)),
       'type',
@@ -57,7 +57,7 @@ class _$UserSerializer implements StructuredSerializer<User> {
           result.date = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;
-        case 'date_gmt':
+        case 'dateGmt':
           result.dateGmt = serializers.deserialize(value,
               specifiedType: const FullType(String))! as String;
           break;

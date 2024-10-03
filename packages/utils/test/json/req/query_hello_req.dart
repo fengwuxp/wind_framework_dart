@@ -1,14 +1,11 @@
-import 'dart:convert';
-
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
 import '../../../lib/src/json/json_serializable_object.dart';
-import '../serializers.dart';
 
 part 'query_hello_req.g.dart';
 
-abstract class QueryHelloReq implements Built<QueryHelloReq, QueryHelloReqBuilder>, JsonSerializableObject {
+abstract class QueryHelloReq extends JsonSerializableObject implements Built<QueryHelloReq, QueryHelloReqBuilder> {
   static Serializer<QueryHelloReq> get serializer => _$queryHelloReqSerializer;
 
   QueryHelloReq._();
@@ -29,14 +26,4 @@ abstract class QueryHelloReq implements Built<QueryHelloReq, QueryHelloReqBuilde
 
   @BuiltValueField(wireName: 'link')
   String get link;
-
-  @override
-  Map<String, dynamic> toMap() {
-    return serializers.serializeWith(QueryHelloReq.serializer, this) as Map<String, dynamic>;
-  }
-
-  @override
-  String toJson() {
-    return json.encode(toMap());
-  }
 }

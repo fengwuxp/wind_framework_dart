@@ -1,5 +1,5 @@
 import 'package:built_value/serializer.dart';
-import 'package:wind_utils/src/json/json_serializer.dart';
+import 'package:wind_utils/wind_utils.dart';
 
 final class JSON {
   static JSONSerializer? _serializer;
@@ -11,22 +11,17 @@ final class JSON {
   /// [specifiedType]  FullType 存在泛型时需要
   /// 泛型支持需要 [SerializersBuilder.addBuilderFactory]
   static T? parseObject<T>(dynamic source,
-      {Type? resultType,
-      Function? formJson,
-      FullType specifiedType = FullType.unspecified}) {
+      {Type? resultType, Function? formJson, FullType specifiedType = FullType.unspecified}) {
     if (_serializer == null) {
       throw ArgumentError('_serializer must not null');
     }
-    return _serializer!.parseObject(source,
-        resultType: resultType,
-        formJson: formJson,
-        specifiedType: specifiedType);
+    return _serializer!.parseObject(source, resultType: resultType, formJson: formJson, specifiedType: specifiedType);
   }
 
   /// object to string
   /// [object] serialize object
   /// [specifiedType]
-  static String? toJsonString<T>(object, {FullType? specifiedType}) {
+  static String? toJsonString<T>(object, {FullType specifiedType = FullType.unspecified}) {
     if (_serializer == null) {
       throw ArgumentError('_serializer must not null');
     }
@@ -35,5 +30,6 @@ final class JSON {
 
   static void setSerializer(JSONSerializer serializer) {
     _serializer = serializer;
+    JsonSerializableObject.jsonSerializer = serializer;
   }
 }

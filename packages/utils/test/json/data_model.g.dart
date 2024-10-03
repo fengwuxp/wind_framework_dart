@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of data_model;
+part of 'data_model.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
@@ -94,13 +94,13 @@ class _$ChatSerializer implements StructuredSerializer<Chat> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'text':
           result.text = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'targets':
           result.targets.replace(serializers.deserialize(value,
@@ -143,17 +143,17 @@ class _$LoginSerializer implements StructuredSerializer<Login> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'username':
           result.username = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'password':
           result.password = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -190,17 +190,17 @@ class _$StatusSerializer implements StructuredSerializer<Status> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'message':
           result.message = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'type':
           result.type = serializers.deserialize(value,
-              specifiedType: const FullType(StatusType)) as StatusType;
+              specifiedType: const FullType(StatusType))! as StatusType;
           break;
       }
     }
@@ -252,7 +252,7 @@ class _$ListUsersSerializer implements StructuredSerializer<ListUsers> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -316,21 +316,21 @@ class _$ShowChatSerializer implements StructuredSerializer<ShowChat> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'username':
           result.username = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'private':
           result.private = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
+              specifiedType: const FullType(bool))! as bool;
           break;
         case 'text':
           result.text = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -368,7 +368,7 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -380,7 +380,7 @@ class _$WelcomeSerializer implements StructuredSerializer<Welcome> {
           break;
         case 'message':
           result.message = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -417,7 +417,7 @@ class _$ListUsersResponseSerializer
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
@@ -440,11 +440,11 @@ class _$Chat extends Chat {
   final BuiltSet<String> targets;
 
   factory _$Chat([void Function(ChatBuilder)? updates]) =>
-      (new ChatBuilder()..update(updates)).build();
+      (new ChatBuilder()..update(updates))._build();
 
   _$Chat._({required this.text, required this.targets}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(text, 'Chat', 'text');
-    BuiltValueNullFieldError.checkNotNull(targets, 'Chat', 'targets');
+    BuiltValueNullFieldError.checkNotNull(text, r'Chat', 'text');
+    BuiltValueNullFieldError.checkNotNull(targets, r'Chat', 'targets');
   }
 
   @override
@@ -462,12 +462,16 @@ class _$Chat extends Chat {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, text.hashCode), targets.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, text.hashCode);
+    _$hash = $jc(_$hash, targets.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Chat')
+    return (newBuiltValueToStringHelper(r'Chat')
           ..add('text', text)
           ..add('targets', targets))
         .toString();
@@ -510,12 +514,15 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
   }
 
   @override
-  _$Chat build() {
+  Chat build() => _build();
+
+  _$Chat _build() {
     _$Chat _$result;
     try {
       _$result = _$v ??
           new _$Chat._(
-              text: BuiltValueNullFieldError.checkNotNull(text, 'Chat', 'text'),
+              text:
+                  BuiltValueNullFieldError.checkNotNull(text, r'Chat', 'text'),
               targets: targets.build());
     } catch (_) {
       late String _$failedField;
@@ -524,7 +531,7 @@ class ChatBuilder implements Builder<Chat, ChatBuilder> {
         targets.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'Chat', _$failedField, e.toString());
+            r'Chat', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -540,11 +547,11 @@ class _$Login extends Login {
   final String password;
 
   factory _$Login([void Function(LoginBuilder)? updates]) =>
-      (new LoginBuilder()..update(updates)).build();
+      (new LoginBuilder()..update(updates))._build();
 
   _$Login._({required this.username, required this.password}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(username, 'Login', 'username');
-    BuiltValueNullFieldError.checkNotNull(password, 'Login', 'password');
+    BuiltValueNullFieldError.checkNotNull(username, r'Login', 'username');
+    BuiltValueNullFieldError.checkNotNull(password, r'Login', 'password');
   }
 
   @override
@@ -564,12 +571,16 @@ class _$Login extends Login {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, username.hashCode), password.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, username.hashCode);
+    _$hash = $jc(_$hash, password.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Login')
+    return (newBuiltValueToStringHelper(r'Login')
           ..add('username', username)
           ..add('password', password))
         .toString();
@@ -611,13 +622,15 @@ class LoginBuilder implements Builder<Login, LoginBuilder> {
   }
 
   @override
-  _$Login build() {
+  Login build() => _build();
+
+  _$Login _build() {
     final _$result = _$v ??
         new _$Login._(
             username: BuiltValueNullFieldError.checkNotNull(
-                username, 'Login', 'username'),
+                username, r'Login', 'username'),
             password: BuiltValueNullFieldError.checkNotNull(
-                password, 'Login', 'password'));
+                password, r'Login', 'password'));
     replace(_$result);
     return _$result;
   }
@@ -630,11 +643,11 @@ class _$Status extends Status {
   final StatusType type;
 
   factory _$Status([void Function(StatusBuilder)? updates]) =>
-      (new StatusBuilder()..update(updates)).build();
+      (new StatusBuilder()..update(updates))._build();
 
   _$Status._({required this.message, required this.type}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(message, 'Status', 'message');
-    BuiltValueNullFieldError.checkNotNull(type, 'Status', 'type');
+    BuiltValueNullFieldError.checkNotNull(message, r'Status', 'message');
+    BuiltValueNullFieldError.checkNotNull(type, r'Status', 'type');
   }
 
   @override
@@ -652,12 +665,16 @@ class _$Status extends Status {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, message.hashCode), type.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, message.hashCode);
+    _$hash = $jc(_$hash, type.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Status')
+    return (newBuiltValueToStringHelper(r'Status')
           ..add('message', message)
           ..add('type', type))
         .toString();
@@ -699,13 +716,15 @@ class StatusBuilder implements Builder<Status, StatusBuilder> {
   }
 
   @override
-  _$Status build() {
+  Status build() => _build();
+
+  _$Status _build() {
     final _$result = _$v ??
         new _$Status._(
             message: BuiltValueNullFieldError.checkNotNull(
-                message, 'Status', 'message'),
+                message, r'Status', 'message'),
             type:
-                BuiltValueNullFieldError.checkNotNull(type, 'Status', 'type'));
+                BuiltValueNullFieldError.checkNotNull(type, r'Status', 'type'));
     replace(_$result);
     return _$result;
   }
@@ -716,11 +735,11 @@ class _$ListUsers extends ListUsers {
   final BuiltSet<StatusType> statusTypes;
 
   factory _$ListUsers([void Function(ListUsersBuilder)? updates]) =>
-      (new ListUsersBuilder()..update(updates)).build();
+      (new ListUsersBuilder()..update(updates))._build();
 
   _$ListUsers._({required this.statusTypes}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        statusTypes, 'ListUsers', 'statusTypes');
+        statusTypes, r'ListUsers', 'statusTypes');
   }
 
   @override
@@ -738,12 +757,15 @@ class _$ListUsers extends ListUsers {
 
   @override
   int get hashCode {
-    return $jf($jc(0, statusTypes.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, statusTypes.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ListUsers')
+    return (newBuiltValueToStringHelper(r'ListUsers')
           ..add('statusTypes', statusTypes))
         .toString();
   }
@@ -781,7 +803,9 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
   }
 
   @override
-  _$ListUsers build() {
+  ListUsers build() => _build();
+
+  _$ListUsers _build() {
     _$ListUsers _$result;
     try {
       _$result = _$v ?? new _$ListUsers._(statusTypes: statusTypes.build());
@@ -792,7 +816,7 @@ class ListUsersBuilder implements Builder<ListUsers, ListUsersBuilder> {
         statusTypes.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'ListUsers', _$failedField, e.toString());
+            r'ListUsers', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -810,14 +834,14 @@ class _$ShowChat extends ShowChat {
   final String text;
 
   factory _$ShowChat([void Function(ShowChatBuilder)? updates]) =>
-      (new ShowChatBuilder()..update(updates)).build();
+      (new ShowChatBuilder()..update(updates))._build();
 
   _$ShowChat._(
       {required this.username, required this.private, required this.text})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(username, 'ShowChat', 'username');
-    BuiltValueNullFieldError.checkNotNull(private, 'ShowChat', 'private');
-    BuiltValueNullFieldError.checkNotNull(text, 'ShowChat', 'text');
+    BuiltValueNullFieldError.checkNotNull(username, r'ShowChat', 'username');
+    BuiltValueNullFieldError.checkNotNull(private, r'ShowChat', 'private');
+    BuiltValueNullFieldError.checkNotNull(text, r'ShowChat', 'text');
   }
 
   @override
@@ -838,13 +862,17 @@ class _$ShowChat extends ShowChat {
 
   @override
   int get hashCode {
-    return $jf(
-        $jc($jc($jc(0, username.hashCode), private.hashCode), text.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, username.hashCode);
+    _$hash = $jc(_$hash, private.hashCode);
+    _$hash = $jc(_$hash, text.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ShowChat')
+    return (newBuiltValueToStringHelper(r'ShowChat')
           ..add('username', username)
           ..add('private', private)
           ..add('text', text))
@@ -892,15 +920,17 @@ class ShowChatBuilder implements Builder<ShowChat, ShowChatBuilder> {
   }
 
   @override
-  _$ShowChat build() {
+  ShowChat build() => _build();
+
+  _$ShowChat _build() {
     final _$result = _$v ??
         new _$ShowChat._(
             username: BuiltValueNullFieldError.checkNotNull(
-                username, 'ShowChat', 'username'),
+                username, r'ShowChat', 'username'),
             private: BuiltValueNullFieldError.checkNotNull(
-                private, 'ShowChat', 'private'),
+                private, r'ShowChat', 'private'),
             text: BuiltValueNullFieldError.checkNotNull(
-                text, 'ShowChat', 'text'));
+                text, r'ShowChat', 'text'));
     replace(_$result);
     return _$result;
   }
@@ -913,11 +943,11 @@ class _$Welcome extends Welcome {
   final String message;
 
   factory _$Welcome([void Function(WelcomeBuilder)? updates]) =>
-      (new WelcomeBuilder()..update(updates)).build();
+      (new WelcomeBuilder()..update(updates))._build();
 
   _$Welcome._({required this.log, required this.message}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(log, 'Welcome', 'log');
-    BuiltValueNullFieldError.checkNotNull(message, 'Welcome', 'message');
+    BuiltValueNullFieldError.checkNotNull(log, r'Welcome', 'log');
+    BuiltValueNullFieldError.checkNotNull(message, r'Welcome', 'message');
   }
 
   @override
@@ -935,12 +965,16 @@ class _$Welcome extends Welcome {
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, log.hashCode), message.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, log.hashCode);
+    _$hash = $jc(_$hash, message.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Welcome')
+    return (newBuiltValueToStringHelper(r'Welcome')
           ..add('log', log)
           ..add('message', message))
         .toString();
@@ -982,14 +1016,16 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
   }
 
   @override
-  _$Welcome build() {
+  Welcome build() => _build();
+
+  _$Welcome _build() {
     _$Welcome _$result;
     try {
       _$result = _$v ??
           new _$Welcome._(
               log: log.build(),
               message: BuiltValueNullFieldError.checkNotNull(
-                  message, 'Welcome', 'message'));
+                  message, r'Welcome', 'message'));
     } catch (_) {
       late String _$failedField;
       try {
@@ -997,7 +1033,7 @@ class WelcomeBuilder implements Builder<Welcome, WelcomeBuilder> {
         log.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'Welcome', _$failedField, e.toString());
+            r'Welcome', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -1012,11 +1048,11 @@ class _$ListUsersResponse extends ListUsersResponse {
 
   factory _$ListUsersResponse(
           [void Function(ListUsersResponseBuilder)? updates]) =>
-      (new ListUsersResponseBuilder()..update(updates)).build();
+      (new ListUsersResponseBuilder()..update(updates))._build();
 
   _$ListUsersResponse._({required this.statuses}) : super._() {
     BuiltValueNullFieldError.checkNotNull(
-        statuses, 'ListUsersResponse', 'statuses');
+        statuses, r'ListUsersResponse', 'statuses');
   }
 
   @override
@@ -1035,12 +1071,15 @@ class _$ListUsersResponse extends ListUsersResponse {
 
   @override
   int get hashCode {
-    return $jf($jc(0, statuses.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, statuses.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('ListUsersResponse')
+    return (newBuiltValueToStringHelper(r'ListUsersResponse')
           ..add('statuses', statuses))
         .toString();
   }
@@ -1079,7 +1118,9 @@ class ListUsersResponseBuilder
   }
 
   @override
-  _$ListUsersResponse build() {
+  ListUsersResponse build() => _build();
+
+  _$ListUsersResponse _build() {
     _$ListUsersResponse _$result;
     try {
       _$result = _$v ?? new _$ListUsersResponse._(statuses: statuses.build());
@@ -1090,7 +1131,7 @@ class ListUsersResponseBuilder
         statuses.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'ListUsersResponse', _$failedField, e.toString());
+            r'ListUsersResponse', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -1099,4 +1140,4 @@ class ListUsersResponseBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

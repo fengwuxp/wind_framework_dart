@@ -33,13 +33,13 @@ class _$TitleSerializer implements StructuredSerializer<Title> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'rendered':
           result.rendered = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
       }
     }
@@ -53,10 +53,10 @@ class _$Title extends Title {
   final String rendered;
 
   factory _$Title([void Function(TitleBuilder)? updates]) =>
-      (new TitleBuilder()..update(updates)).build();
+      (new TitleBuilder()..update(updates))._build();
 
   _$Title._({required this.rendered}) : super._() {
-    BuiltValueNullFieldError.checkNotNull(rendered, 'Title', 'rendered');
+    BuiltValueNullFieldError.checkNotNull(rendered, r'Title', 'rendered');
   }
 
   @override
@@ -74,12 +74,15 @@ class _$Title extends Title {
 
   @override
   int get hashCode {
-    return $jf($jc(0, rendered.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, rendered.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Title')..add('rendered', rendered))
+    return (newBuiltValueToStringHelper(r'Title')..add('rendered', rendered))
         .toString();
   }
 }
@@ -114,14 +117,16 @@ class TitleBuilder implements Builder<Title, TitleBuilder> {
   }
 
   @override
-  _$Title build() {
+  Title build() => _build();
+
+  _$Title _build() {
     final _$result = _$v ??
         new _$Title._(
             rendered: BuiltValueNullFieldError.checkNotNull(
-                rendered, 'Title', 'rendered'));
+                rendered, r'Title', 'rendered'));
     replace(_$result);
     return _$result;
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

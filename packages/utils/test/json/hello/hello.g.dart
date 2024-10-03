@@ -47,29 +47,29 @@ class _$HelloSerializer implements StructuredSerializer<Hello> {
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
-      final key = iterator.current as String;
+      final key = iterator.current! as String;
       iterator.moveNext();
       final Object? value = iterator.current;
       switch (key) {
         case 'id':
           result.id = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
+              specifiedType: const FullType(int))! as int;
           break;
         case 'date':
           result.date = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'date_gmt':
           result.dateGmt = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'type':
           result.type = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'link':
           result.link = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(String))! as String;
           break;
         case 'title':
           result.title.replace(serializers.deserialize(value,
@@ -105,7 +105,7 @@ class _$Hello extends Hello {
   final BuiltList<int> tags;
 
   factory _$Hello([void Function(HelloBuilder)? updates]) =>
-      (new HelloBuilder()..update(updates)).build();
+      (new HelloBuilder()..update(updates))._build();
 
   _$Hello._(
       {required this.id,
@@ -116,13 +116,13 @@ class _$Hello extends Hello {
       required this.title,
       required this.tags})
       : super._() {
-    BuiltValueNullFieldError.checkNotNull(id, 'Hello', 'id');
-    BuiltValueNullFieldError.checkNotNull(date, 'Hello', 'date');
-    BuiltValueNullFieldError.checkNotNull(dateGmt, 'Hello', 'dateGmt');
-    BuiltValueNullFieldError.checkNotNull(type, 'Hello', 'type');
-    BuiltValueNullFieldError.checkNotNull(link, 'Hello', 'link');
-    BuiltValueNullFieldError.checkNotNull(title, 'Hello', 'title');
-    BuiltValueNullFieldError.checkNotNull(tags, 'Hello', 'tags');
+    BuiltValueNullFieldError.checkNotNull(id, r'Hello', 'id');
+    BuiltValueNullFieldError.checkNotNull(date, r'Hello', 'date');
+    BuiltValueNullFieldError.checkNotNull(dateGmt, r'Hello', 'dateGmt');
+    BuiltValueNullFieldError.checkNotNull(type, r'Hello', 'type');
+    BuiltValueNullFieldError.checkNotNull(link, r'Hello', 'link');
+    BuiltValueNullFieldError.checkNotNull(title, r'Hello', 'title');
+    BuiltValueNullFieldError.checkNotNull(tags, r'Hello', 'tags');
   }
 
   @override
@@ -147,21 +147,21 @@ class _$Hello extends Hello {
 
   @override
   int get hashCode {
-    return $jf($jc(
-        $jc(
-            $jc(
-                $jc(
-                    $jc($jc($jc(0, id.hashCode), date.hashCode),
-                        dateGmt.hashCode),
-                    type.hashCode),
-                link.hashCode),
-            title.hashCode),
-        tags.hashCode));
+    var _$hash = 0;
+    _$hash = $jc(_$hash, id.hashCode);
+    _$hash = $jc(_$hash, date.hashCode);
+    _$hash = $jc(_$hash, dateGmt.hashCode);
+    _$hash = $jc(_$hash, type.hashCode);
+    _$hash = $jc(_$hash, link.hashCode);
+    _$hash = $jc(_$hash, title.hashCode);
+    _$hash = $jc(_$hash, tags.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
   }
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Hello')
+    return (newBuiltValueToStringHelper(r'Hello')
           ..add('id', id)
           ..add('date', date)
           ..add('dateGmt', dateGmt)
@@ -233,20 +233,22 @@ class HelloBuilder implements Builder<Hello, HelloBuilder> {
   }
 
   @override
-  _$Hello build() {
+  Hello build() => _build();
+
+  _$Hello _build() {
     _$Hello _$result;
     try {
       _$result = _$v ??
           new _$Hello._(
-              id: BuiltValueNullFieldError.checkNotNull(id, 'Hello', 'id'),
+              id: BuiltValueNullFieldError.checkNotNull(id, r'Hello', 'id'),
               date:
-                  BuiltValueNullFieldError.checkNotNull(date, 'Hello', 'date'),
+                  BuiltValueNullFieldError.checkNotNull(date, r'Hello', 'date'),
               dateGmt: BuiltValueNullFieldError.checkNotNull(
-                  dateGmt, 'Hello', 'dateGmt'),
+                  dateGmt, r'Hello', 'dateGmt'),
               type:
-                  BuiltValueNullFieldError.checkNotNull(type, 'Hello', 'type'),
+                  BuiltValueNullFieldError.checkNotNull(type, r'Hello', 'type'),
               link:
-                  BuiltValueNullFieldError.checkNotNull(link, 'Hello', 'link'),
+                  BuiltValueNullFieldError.checkNotNull(link, r'Hello', 'link'),
               title: title.build(),
               tags: tags.build());
     } catch (_) {
@@ -258,7 +260,7 @@ class HelloBuilder implements Builder<Hello, HelloBuilder> {
         tags.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
-            'Hello', _$failedField, e.toString());
+            r'Hello', _$failedField, e.toString());
       }
       rethrow;
     }
@@ -267,4 +269,4 @@ class HelloBuilder implements Builder<Hello, HelloBuilder> {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,deprecated_member_use_from_same_package,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

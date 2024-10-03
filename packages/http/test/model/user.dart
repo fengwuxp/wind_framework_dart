@@ -10,7 +10,7 @@ import './serializers.dart';
 part 'user.g.dart';
 
 // 用户对象
-abstract class User implements Built<User, UserBuilder>, JsonSerializableObject {
+abstract class User extends JsonSerializableObject implements Built<User, UserBuilder> {
   User._();
 
   factory User([updates(UserBuilder b)]) = _$User;
@@ -21,7 +21,7 @@ abstract class User implements Built<User, UserBuilder>, JsonSerializableObject 
   @BuiltValueField(wireName: 'date')
   String get date;
 
-  @BuiltValueField(wireName: 'date_gmt')
+  @BuiltValueField(wireName: 'dateGmt')
   String get dateGmt;
 
   @BuiltValueField(wireName: 'type')
@@ -37,15 +37,5 @@ abstract class User implements Built<User, UserBuilder>, JsonSerializableObject 
 
   static User? formJson(String json) {
     return serializers.deserializeWith(User.serializer, jsonDecode(json));
-  }
-
-  @override
-  Map<String, dynamic> toMap() {
-    return serializers.serializeWith(User.serializer, this) as Map<String, dynamic>;
-  }
-
-  @override
-  String toJson() {
-    return json.encode(toMap());
   }
 }
