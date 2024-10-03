@@ -25,7 +25,6 @@ void main() {
         "errorCode": "0",
         "traceId": "19o23k1231241"
       }, FullType(User));
-      final tex2 = jsonSerializer.toJsonString(response);
 
       final FullType responseFullType = FullType(ApiResponse, [
         FullType(BuiltList, [FullType(int)])
@@ -34,7 +33,6 @@ void main() {
         ..data = BuiltList<int>([1, 2, 4])
         ..success = true
         ..errorCode = "0"
-        ..errorMessage = ""
         ..traceId = "12313");
       final text = jsonSerializer.toJsonString(listApiResponse, specifiedType: responseFullType);
       expect(jsonSerializer.parseObject(text, specifiedType: responseFullType), listApiResponse);

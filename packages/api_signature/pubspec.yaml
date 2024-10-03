@@ -1,0 +1,22 @@
+name: wind_api_signature
+description: >
+  wind framework api signature
+version: 0.0.1
+repository: https://github.com/fengwuxp/wind_framework_dart
+
+environment:
+  sdk: ^3.5.3
+
+# Add regular dependencies here.
+dependencies:
+  pointycastle: ^3.3.0
+  asn1lib: ^1.5.6
+  logging: ^1.2.0
+
+
+dev_dependencies:
+  args: ^2.4.2
+  lints: ^4.0.0
+  test: ^1.24.0
+  build_runner: ^2.4.13
+  built_value_generator: ^8.9.2
